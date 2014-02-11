@@ -1,0 +1,58 @@
+#include <iostream>
+
+class llist
+{
+private:
+    struct node
+    {
+        char data;
+        node * next;
+    }*p,*q;
+public:
+    llist()
+    {
+        p=new node;
+        q=p;
+    }
+    void add(char item)
+    {
+            q->data=item;
+            q->next=new node;
+            q=q->next;
+    }
+    void display()
+    {
+        node *r=p;
+        while(r->next!=NULL)
+        {
+            std::cout<<r->data;
+            r=r->next;
+            if(r->next!=NULL)
+             std::cout<<"->";
+        }
+            
+    }
+    ~llist()
+    {
+        while(p!=NULL)
+            delete p;
+    }
+};
+
+
+int main(int argc, const char * argv[])
+{
+    char *s1=(char *)malloc(sizeof(char)*100);
+    std::cout<<"Enter the string:";
+    std::cin>>s1;
+    int i=0;
+    llist* obj=new llist();
+    while(s1[i]!='\0')
+    {
+        obj->add(s1[i]);
+        i++;
+    }
+    obj->display();
+    return 0;
+}
+
