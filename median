@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include<malloc/malloc.h>
+
+void read1(int *p,int size) // input reading function
+{
+    int i;
+    printf("Enter the array:");
+    for(i=0;i<size;i++)
+    {
+        scanf("%d",p+i);
+    }
+}
+float median(int *a, int *b,int size1,int size2)
+{
+    int size=size1+size2;
+    int mid=size/2;
+    int *c=(int*)malloc(sizeof(int)* size);
+    int i=0,j=0,k=0;
+    while(i<size1 && j<size2)   //Merge sort
+    {
+        if(a[i]<b[j])
+        {
+            c[k]=a[i];
+            i++;
+        }
+        else
+        {
+            c[k]=b[j];
+            j++;
+        }
+        k++;
+    }
+    while(i<size1)
+    {
+        c[k++]=a[i++];
+    }
+    
+    while(j<size2)
+    {
+        c[k++]=b[j++];
+    }
+    
+    if(size%2==0)
+    return ((c[mid]+c[mid-1])/2.0); // for even median
+    else
+        return c[mid];          //for odd median
+    
+}
+int main(int argc, const char * argv[])
+{
+    int size1,size2;
+    int *a,*b;
+    printf("Enter the size of 1st array:");
+    scanf("%d",&size1);
+    a=(int*)malloc(sizeof(int)* size1);
+    read1(a,size1);
+    printf("Enter the size of 2nd array:");
+    scanf("%d",&size2);
+    b=(int*)malloc(sizeof(int)* size2);
+    read1(b,size2);
+    printf( "Median : %f",  median(a, b, size1, size2));
+    return 0;
+}
+
