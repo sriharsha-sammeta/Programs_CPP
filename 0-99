@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include<math.h>
+
+
+
+void process(int *a,int size)
+{
+int *b=(int *)malloc(sizeof(int)*100);
+    int i=-1,max=0,ans;
+    while(++i<100)
+        b[i]=0;
+    i=-1;
+    while(++i<size) // adding it to b which is counter array
+    {
+        b[a[i]]++;
+    }
+    i=-1;
+    while(++i<100) // finding the max value
+    {
+        if(b[i]>max)
+        { ans=i;
+            max=b[i];
+        }
+    }
+    i=-1;
+    while(++i<100)  // if a value is repeated more than once   
+    {
+       if(b[i]==max)
+           printf("\n%d repeated: %d times\n",i,b[i]);
+    }
+    
+
+}
+
+int main()
+{
+        printf("Enter the size:");
+    int size,i;
+    scanf("%d",&size);
+   int * a=(int *)malloc(sizeof(int)*size);
+    printf("Enter the array:");
+    for(i=0;i<size;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    process(a,size);
+    return 0;
+}
